@@ -21,11 +21,11 @@ import routerProvider, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
 import { App as AntdApp } from "antd";
-import { createClient } from "graphql-ws";
+// import { createClient } from "graphql-ws";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-import { authProvider } from "./authProvider";
-import { Header } from "./components/header";
-import { ColorModeContextProvider } from "./contexts/color-mode";
+// import { authProvider } from "./authProvider";
+// import { Header } from "./components/header";
+// import { ColorModeContextProvider } from "./contexts/color-mode";
 import {
   BlogPostCreate,
   BlogPostEdit,
@@ -46,22 +46,22 @@ const API_URL = "https://api.nestjs-query.refine.dev/graphql";
 const WS_URL = "wss://api.nestjs-query.refine.dev/graphql";
 
 const gqlClient = new GraphQLClient(API_URL);
-const wsClient = createClient({ url: WS_URL });
+// const wsClient = createClient({ url: WS_URL });
 
 function App() {
   return (
     <BrowserRouter>
       <GitHubBanner />
       <RefineKbarProvider>
-        <ColorModeContextProvider>
+        
           <AntdApp>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider(gqlClient)}
-                liveProvider={liveProvider(wsClient)}
+                // dataProvider={dataProvider(gqlClient)}
+                // liveProvider={liveProvider(wsClient)}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
-                authProvider={authProvider}
+                // authProvider={}
                 resources={[
                   {
                     name: "blog_posts",
@@ -99,7 +99,6 @@ function App() {
                         fallback={<CatchAllNavigate to="/login" />}
                       >
                         <ThemedLayout
-                          Header={Header}
                           Sider={(props) => <ThemedSider {...props} fixed />}
                         >
                           <Outlet />
@@ -151,7 +150,6 @@ function App() {
               <DevtoolsPanel />
             </DevtoolsProvider>
           </AntdApp>
-        </ColorModeContextProvider>
       </RefineKbarProvider>
     </BrowserRouter>
   );
